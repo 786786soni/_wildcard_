@@ -262,7 +262,7 @@ table.grid{width:100%;border-collapse:separate;border-spacing:0;font-size:15.5px
 .sig .nm{font-size:13px;color:#000;margin-top:1px}
 .foot{margin-top:12px;text-align:center;font-size:12px;color:#000;letter-spacing:.5px}
 /* print: one sheet a pupil, filled top to bottom */
-@media print{body{margin:0}.rc{box-shadow:none;border-radius:0;border:0;max-width:none;margin:0;zoom:.92;height:1148px;display:flex;flex-direction:column;overflow:visible;page-break-inside:avoid;page-break-after:always}.rc-top{flex:none}.rc-body{flex:1;display:flex;flex-direction:column;padding:12px 20px 14px}.rc-title,.prof,.sec,.grid,.two,.kpi,.key,.pa,.pa-key,.att,.rem{flex:none}.sig{flex:none;margin-top:auto;padding-top:20px}.rc *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{body{margin:0}.rc{box-shadow:none;border-radius:0;border:0;max-width:none;margin:0;zoom:1;height:1190px;display:flex;flex-direction:column;overflow:visible;page-break-inside:avoid;page-break-after:always}.rc-top{flex:none}.rc-body{flex:1;display:flex;flex-direction:column;padding:12px 20px 14px}.rc-title,.prof,.sec,.grid,.two,.kpi,.key,.pa,.pa-key,.att,.rem{flex:none}.sig{flex:none;margin-top:auto;padding-top:20px}.rc *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 <?php
 $school  = Yii::app()->db->createCommand("SELECT * FROM tb_school WHERE 1 LIMIT 1")->queryRow();
@@ -521,17 +521,22 @@ foreach ($student_ids as $student_id) {
            + 70 + max($coTallest, 1) * 33
            + ($bands ? 92 : 0)
            + ($paRows ? ($ppGraphH + 110) : 0);
-    $ppZoom = 0.92;
-    if ($ppEst + 25 > 1148) {
-        $ppZoom = floor((1056 / ($ppEst + 25)) * 100) / 100;
-        if ($ppZoom > 0.92) { $ppZoom = 0.92; }
-        if ($ppZoom < 0.58) { $ppZoom = 0.58; }
+    /* PATEL_RC_FONT: the cap was .92, so even a sparse card printed 8% under its own type size; it is
+       now 1, and the floor is .72 rather than .58 - below that the card's 15.5px grid text lands under
+       11px on paper, which is what the school was reading as too light. A card dense enough to want
+       less than .72 (many subjects plus the graph) is held at .72 and allowed to run a little long
+       rather than shrunk to nothing; $ppShowGraph = false frees ~220px and lifts it well clear. */
+    $ppZoom = 1;
+    if ($ppEst + 25 > 1190) {
+        $ppZoom = floor((1110 / ($ppEst + 25)) * 100) / 100;
+        if ($ppZoom > 1) { $ppZoom = 1; }
+        if ($ppZoom < 0.72) { $ppZoom = 0.72; }
     }
     $secNo = 0;
 ?>
 <input type="hidden" name="standard" id="standard" value="<?php echo $standard_id; ?>">
 <input type="hidden" name="section" id="section" value="<?php echo $section_id; ?>">
-<style type="text/css">@media print{#rc_<?php echo $student_id; ?>{zoom:<?php echo $ppZoom; ?>;height:<?php echo round(1056 / $ppZoom); ?>px}}</style>
+<style type="text/css">@media print{#rc_<?php echo $student_id; ?>{zoom:<?php echo $ppZoom; ?>;height:<?php echo round(1110 / $ppZoom); ?>px}}</style>
 <div class="rc" id="rc_<?php echo $student_id; ?>">
     <div class="rc-top">
         <div class="lg"><span><img src="<?php echo Yii::app()->getBaseUrl(true) . $logosrc; ?>" alt=""></span></div>
@@ -774,7 +779,7 @@ foreach ($student_ids as $student_id) {
         var inner = $('#print_condent').html();
         var w = window.open('', '', 'height=700,width=1000,scrollbars=1,resizable=1');
         w.document.write('<html><head><title>Report Card</title>'
-            + '<style type="text/css">html,body{font-family:"Segoe UI",Calibri,Arial;margin:0;padding:0;background:#fff} @page{margin:8mm}</style>'
+            + '<style type="text/css">html,body{font-family:"Segoe UI",Calibri,Arial;margin:0;padding:0;background:#fff} @page{margin:5mm}</style>'
             + '<style type="text/css">' + css + '</style></head><body><div id="print_condent">' + inner + '</div></body></html>');
         w.document.close();
         setTimeout(function () { w.focus(); w.print(); }, 900);
