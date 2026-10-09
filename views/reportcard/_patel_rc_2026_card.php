@@ -214,10 +214,11 @@ table.prof{width:100%;border-collapse:separate;border-spacing:0;background:<?php
 table.grid{width:100%;border-collapse:separate;border-spacing:0;font-size:26px;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;overflow:hidden}
 #print_condent .rc table.grid thead th{background:<?php echo $ppDeep; ?> !important;background-image:linear-gradient(180deg,<?php echo $ppMid; ?>,<?php echo $ppDeep; ?>) !important;color:#fff !important;font-weight:700;padding:7px 5px;text-align:center;font-size:12.5px;letter-spacing:.3px;border:0 !important;border-bottom:2px solid <?php echo $ppGold; ?> !important}
 .grid th small{display:block;font-weight:600;opacity:.85;font-size:19px}
-#print_condent .rc table.grid tbody td{padding:6px 5px;text-align:center;font-weight:800;border:0 !important;border-top:1px solid <?php echo $ppLine; ?> !important;background:#fff !important;color:#000 !important}
+#print_condent .rc table.grid tbody td{padding:6px 5px;text-align:center;font-size:26px !important;font-weight:800 !important;border:0 !important;border-top:1px solid <?php echo $ppLine; ?> !important;background:#fff !important;color:#000 !important}
 #print_condent .rc table.grid tbody tr:nth-child(even) td{background:<?php echo $ppTint2; ?> !important}
-#print_condent .rc table.grid tbody td.l{text-align:left;font-weight:800 !important;padding-left:10px;font-size:16px}
+#print_condent .rc table.grid tbody td.l{text-align:left;font-weight:800 !important;padding-left:10px;font-size:16px !important}
 #print_condent .rc table.grid tbody tr.tot td{background:#fff6d8 !important;font-weight:800;color:<?php echo $ppDeep; ?> !important;border-top:1.5px solid <?php echo $ppGold; ?> !important}
+#print_condent .rc table.grid tbody td b{font-weight:800}
 .grid .dash{color:#000}
 .grid .ab{color:#c0392b;font-weight:800}
 .gb{display:inline-block;min-width:26px;padding:2px 8px;border-radius:12px;font-weight:800;font-size:13.5px;color:#fff;background:#8592a3;line-height:1.35}
