@@ -202,7 +202,7 @@ table.prof{width:100%;border-collapse:separate;border-spacing:0;background:<?php
 #print_condent .rc table.prof td{padding:7px 12px;width:33.3%;font-size:15px;vertical-align:top;background:transparent !important;color:#000 !important;border:0 !important}
 .prof td small{display:inline;color:<?php echo $ppDeep; ?>;font-size:16px;font-weight:700;text-transform:none;letter-spacing:0}
 .prof td small::after{content:' : '}
-.prof td b{font-size:16px;color:<?php echo $ppDeep; ?>}
+.prof td b{font-size:16px;font-weight:800;color:<?php echo $ppDeep; ?>}
 .sec{display:table;width:100%;margin:13px 0 6px}
 .sec .no{display:table-cell;width:26px;height:26px;border-radius:8px;background:<?php echo $ppGold; ?>;color:<?php echo $ppDeep; ?>;font-weight:800;font-size:14px;text-align:center;vertical-align:middle}
 .sec h3{display:table-cell;vertical-align:middle;padding-left:9px;margin:0;font-size:16px;letter-spacing:1.2px;text-transform:uppercase;color:<?php echo $ppDeep; ?>;font-weight:800}
@@ -210,7 +210,7 @@ table.prof{width:100%;border-collapse:separate;border-spacing:0;background:<?php
 table.grid{width:100%;border-collapse:separate;border-spacing:0;font-size:15.5px;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;overflow:hidden}
 #print_condent .rc table.grid thead th{background:<?php echo $ppDeep; ?> !important;background-image:linear-gradient(180deg,<?php echo $ppMid; ?>,<?php echo $ppDeep; ?>) !important;color:#fff !important;font-weight:700;padding:7px 5px;text-align:center;font-size:12.5px;letter-spacing:.3px;border:0 !important;border-bottom:2px solid <?php echo $ppGold; ?> !important}
 .grid th small{display:block;font-weight:600;opacity:.85;font-size:12px}
-#print_condent .rc table.grid tbody td{padding:6px 5px;text-align:center;border:0 !important;border-top:1px solid <?php echo $ppLine; ?> !important;background:#fff !important;color:#000 !important}
+#print_condent .rc table.grid tbody td{padding:6px 5px;text-align:center;font-weight:700;border:0 !important;border-top:1px solid <?php echo $ppLine; ?> !important;background:#fff !important;color:#000 !important}
 #print_condent .rc table.grid tbody tr:nth-child(even) td{background:<?php echo $ppTint2; ?> !important}
 #print_condent .rc table.grid tbody td.l{text-align:left;font-weight:800 !important;padding-left:10px;font-size:16px}
 #print_condent .rc table.grid tbody tr.tot td{background:#fff6d8 !important;font-weight:800;color:<?php echo $ppDeep; ?> !important;border-top:1.5px solid <?php echo $ppGold; ?> !important}
