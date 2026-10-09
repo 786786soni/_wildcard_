@@ -35,18 +35,31 @@ $ppShowPtm = ($ppPage !== 'newRC20266to8Patel');
 $ppShowDrawing = ($ppPage !== 'newRC20266to8Patel');
 
 /* PATEL_RC_TYPE 2026-10-09 - the school reads the printed sheet at arm's length across a desk, so the card's
-   type is a fifth larger than it was and the whole palette is a shade deeper: the same Segoe UI / Calibri
-   stack the earlier cards printed in, every size scaled about 20%, and the purples, greys, gold and grade
-   badges all darkened for a stronger contrast on paper and on the school's laser printer. Nothing below
-   this block touches a figure - it is the look only. */
+   type is a fifth larger than it was: the same Segoe UI / Calibri stack the earlier cards printed in, every
+   size scaled about 20%.
+   PATEL_RC_DARK 2026-10-09 - and the card is now a DARK card, not a white one with darker ink: deep
+   near-black purple surfaces, light type, the gold accent lifted so it still reads on them, and the grade
+   badges and graph bars re-picked for a dark ground. Every colour the card uses is one of the tokens below,
+   so the whole theme is this block - nothing under it carries a literal colour of its own.
+   Printing a dark card lays solid toner over the whole A4 sheet (the print rules keep backgrounds exact on
+   purpose, so it prints as it looks). Reverting to the white card is this block alone. */
 /* the card's look in one place */
-$ppDeep = '#1b1040'; $ppMid = '#35206b'; $ppEnd = '#5a2b85';
-$ppBord = '#c9bfe4'; $ppTint1 = '#eeeaf8'; $ppTint2 = '#f3f0fb'; $ppTint3 = '#e4ddf6';
-$ppLine = '#d4cae9'; $ppChip = '#d9d1ee'; $ppShad = '27,16,64';
-$ppGold = '#d4a017';
-$ppInk  = '#0f1522';    /* body text */
-$ppInk2 = '#46505f';    /* labels and captions */
-$ppInk3 = '#5c6676';    /* axis numbers, footer */
+$ppDeep = '#120c20';    /* the card itself */
+$ppMid  = '#241a44';    /* panel / table-head fill */
+$ppEnd  = '#3a2a64';    /* the lit end of the header gradient */
+$ppHead = '#070412';    /* header gradient start, and the grid's thead */
+$ppSurf = '#191130';    /* profile, attendance, KPI surfaces */
+$ppSurf2= '#1f1638';    /* the even grid row */
+$ppBord = '#3a3157';    /* panel borders */
+$ppLine = '#2d2648';    /* rules inside a table */
+$ppChip = '#2a2246';    /* an empty grade chip */
+$ppTint1 = '#191130'; $ppTint2 = '#1c1434'; $ppTint3 = '#241a40';
+$ppShad = '0,0,0';
+$ppGold = '#e8b53d';    /* lifted from #d4a017 so it carries on a dark ground */
+$ppInk  = '#f2effa';    /* body text */
+$ppInk2 = '#c0b8d6';    /* labels and captions */
+$ppInk3 = '#9a92b2';    /* axis numbers, footer */
+$ppErr  = '#ff8f7e';    /* the "not set up" lines */
 $ppGraphH    = 112;     /* graph plot height in px */
 $ppShowGraph = true;    /* false hides the whole Performance Analysis section */
 $ppTitle     = 'Performance Profile';
@@ -187,88 +200,92 @@ $ppMainIn2 = implode(',', $ppMainQ2);
    is pinned at id-level specificity with !important, as on the Millennium and St. Mary's cards.
    PATEL_RC_TYPE: every font-size here is the earlier card's size scaled about 20%, and every ink is a
    shade deeper; the stack itself is the one the school already prints in. */
-.rc{max-width:800px;margin:0 auto 22px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 8px 28px rgba(<?php echo $ppShad; ?>,.22);border:1px solid <?php echo $ppBord; ?>;font-family:'Segoe UI',Calibri,Arial,sans-serif;color:<?php echo $ppInk; ?>;page-break-after:always;line-height:1.3}
-.rc-top{background:linear-gradient(120deg,<?php echo $ppDeep; ?> 0%,<?php echo $ppMid; ?> 52%,<?php echo $ppEnd; ?> 100%);color:#fff;padding:16px 22px;display:table;width:100%;box-sizing:border-box;position:relative}
+#print_condent{background:<?php echo $ppHead; ?>;padding:14px 0 1px;border-radius:10px}
+.rc{max-width:800px;margin:0 auto 22px;background:<?php echo $ppDeep; ?>;border-radius:14px;overflow:hidden;box-shadow:0 10px 32px rgba(<?php echo $ppShad; ?>,.55);border:1px solid <?php echo $ppBord; ?>;font-family:'Segoe UI',Calibri,Arial,sans-serif;color:<?php echo $ppInk; ?>;page-break-after:always;line-height:1.3}
+.rc-top{background:linear-gradient(120deg,<?php echo $ppHead; ?> 0%,<?php echo $ppMid; ?> 52%,<?php echo $ppEnd; ?> 100%);color:#fff;padding:16px 22px;display:table;width:100%;box-sizing:border-box;position:relative;border-bottom:1px solid <?php echo $ppBord; ?>}
 .rc-top .lg{display:table-cell;width:92px;vertical-align:middle}
-.rc-top .lg span{display:inline-block;width:84px;height:84px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px <?php echo $ppGold; ?>,0 2px 10px rgba(0,0,0,.35);text-align:center}
+.rc-top .lg span{display:inline-block;width:84px;height:84px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px <?php echo $ppGold; ?>,0 2px 10px rgba(0,0,0,.6);text-align:center}
 .rc-top .lg img{width:74px;height:74px;margin-top:5px;object-fit:contain;border-radius:50%}
 .rc-top .sc{display:table-cell;vertical-align:middle;padding-left:14px}
-.rc-top .sc h1{margin:0;font-size:25px;letter-spacing:.6px;text-transform:uppercase;font-weight:800;line-height:1.1;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
-.rc-top .sc p{margin:3px 0 0;font-size:14px;color:#eceef9}
+.rc-top .sc h1{margin:0;font-size:25px;letter-spacing:.6px;text-transform:uppercase;font-weight:800;line-height:1.1;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.rc-top .sc p{margin:3px 0 0;font-size:14px;color:<?php echo $ppInk2; ?>}
 .rc-top .tg{display:table-cell;width:100px;vertical-align:middle;text-align:right}
-.rc-top .tg .cbl{display:block;width:84px;height:84px;margin:0 0 0 auto;border-radius:50%;background:#fff;box-shadow:0 0 0 3px <?php echo $ppGold; ?>,0 2px 10px rgba(0,0,0,.35);text-align:center}
+.rc-top .tg .cbl{display:block;width:84px;height:84px;margin:0 0 0 auto;border-radius:50%;background:#fff;box-shadow:0 0 0 3px <?php echo $ppGold; ?>,0 2px 10px rgba(0,0,0,.6);text-align:center}
 .rc-top .tg .cbl img{width:74px;height:74px;margin-top:5px;object-fit:contain;border-radius:50%}
-.rc-body{padding:14px 22px 18px}
+.rc-body{padding:14px 22px 18px;background:<?php echo $ppDeep; ?>}
 .rc-title{text-align:center;margin:0 0 10px}
-.rc-title b{font-size:23px;color:<?php echo $ppDeep; ?>;letter-spacing:3px;text-transform:uppercase}
+.rc-title b{font-size:23px;color:<?php echo $ppGold; ?>;letter-spacing:3px;text-transform:uppercase}
 .rc-title small{display:block;color:<?php echo $ppInk2; ?>;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:1px}
 .rc-title:after{content:'';display:block;width:64px;height:3px;background:<?php echo $ppGold; ?>;margin:6px auto 0;border-radius:2px}
-table.prof{width:100%;border-collapse:separate;border-spacing:0;background:<?php echo $ppTint1; ?>;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;border-left:5px solid <?php echo $ppGold; ?>}
+table.prof{width:100%;border-collapse:separate;border-spacing:0;background:<?php echo $ppSurf; ?>;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;border-left:5px solid <?php echo $ppGold; ?>}
 #print_condent .rc table.prof td{padding:7px 12px;width:33.3%;font-size:15px;vertical-align:top;background:transparent !important;color:<?php echo $ppInk; ?> !important;border:0 !important}
-.prof td small{display:inline;color:<?php echo $ppDeep; ?>;font-size:16px;font-weight:700;text-transform:none;letter-spacing:0}
+.prof td small{display:inline;color:<?php echo $ppGold; ?>;font-size:16px;font-weight:700;text-transform:none;letter-spacing:0}
 .prof td small::after{content:' : '}
-.prof td b{font-size:16px;color:<?php echo $ppDeep; ?>}
+.prof td b{font-size:16px;color:<?php echo $ppInk; ?>}
 .sec{display:table;width:100%;margin:13px 0 6px}
-.sec .no{display:table-cell;width:30px;height:30px;border-radius:8px;background:<?php echo $ppGold; ?>;color:<?php echo $ppDeep; ?>;font-weight:800;font-size:14px;text-align:center;vertical-align:middle}
-.sec h3{display:table-cell;vertical-align:middle;padding-left:9px;margin:0;font-size:16px;letter-spacing:1.2px;text-transform:uppercase;color:<?php echo $ppDeep; ?>;font-weight:800}
+.sec .no{display:table-cell;width:30px;height:30px;border-radius:8px;background:<?php echo $ppGold; ?>;color:<?php echo $ppHead; ?>;font-weight:800;font-size:14px;text-align:center;vertical-align:middle}
+.sec h3{display:table-cell;vertical-align:middle;padding-left:9px;margin:0;font-size:16px;letter-spacing:1.2px;text-transform:uppercase;color:<?php echo $ppGold; ?>;font-weight:800}
 .sec .sub{display:table-cell;vertical-align:middle;text-align:right;font-size:12.5px;color:<?php echo $ppInk2; ?>;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
 table.grid{width:100%;border-collapse:separate;border-spacing:0;font-size:15.5px;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;overflow:hidden}
-#print_condent .rc table.grid thead th{background:<?php echo $ppDeep; ?> !important;background-image:linear-gradient(180deg,<?php echo $ppMid; ?>,<?php echo $ppDeep; ?>) !important;color:#fff !important;font-weight:700;padding:7px 5px;text-align:center;font-size:12.5px;letter-spacing:.3px;border:0 !important;border-bottom:2px solid <?php echo $ppGold; ?> !important}
-.grid th small{display:block;font-weight:600;opacity:.9;font-size:12px}
-#print_condent .rc table.grid tbody td{padding:6px 5px;text-align:center;border:0 !important;border-top:1px solid <?php echo $ppLine; ?> !important;background:#fff !important;color:<?php echo $ppInk; ?> !important}
-#print_condent .rc table.grid tbody tr:nth-child(even) td{background:<?php echo $ppTint2; ?> !important}
+#print_condent .rc table.grid thead th{background:<?php echo $ppHead; ?> !important;background-image:linear-gradient(180deg,<?php echo $ppMid; ?>,<?php echo $ppHead; ?>) !important;color:#fff !important;font-weight:700;padding:7px 5px;text-align:center;font-size:12.5px;letter-spacing:.3px;border:0 !important;border-bottom:2px solid <?php echo $ppGold; ?> !important}
+.grid th small{display:block;font-weight:600;color:<?php echo $ppInk2; ?>;font-size:12px}
+#print_condent .rc table.grid tbody td{padding:6px 5px;text-align:center;border:0 !important;border-top:1px solid <?php echo $ppLine; ?> !important;background:<?php echo $ppMid; ?> !important;color:<?php echo $ppInk; ?> !important}
+#print_condent .rc table.grid tbody tr:nth-child(even) td{background:<?php echo $ppSurf2; ?> !important}
 #print_condent .rc table.grid tbody td.l{text-align:left;font-weight:800 !important;padding-left:10px;font-size:16px}
-#print_condent .rc table.grid tbody tr.tot td{background:#ffeeb8 !important;font-weight:800;color:<?php echo $ppDeep; ?> !important;border-top:1.5px solid <?php echo $ppGold; ?> !important}
-.grid .dash{color:#6b7686}
-.grid .ab{color:#96281c;font-weight:800}
-.gb{display:inline-block;min-width:30px;padding:2px 8px;border-radius:12px;font-weight:800;font-size:13.5px;color:#fff;background:#5f6b7d;line-height:1.35}
-.gb.g-none{background:<?php echo $ppChip; ?>;color:<?php echo $ppInk2; ?>}
-.gb.g-A1,.gb.g-A,.gb.g-Aplus{background:#0f7a44}.gb.g-A2{background:#1f8a5c}.gb.g-B1,.gb.g-B,.gb.g-Bplus{background:#1f5f9b}.gb.g-B2{background:#3b74b4}.gb.g-C1,.gb.g-C,.gb.g-Cplus{background:#b87a0c}.gb.g-C2{background:#ad600a}.gb.g-D{background:#a54221}.gb.g-E{background:#96281c}
+#print_condent .rc table.grid tbody tr.tot td{background:#4a3708 !important;font-weight:800;color:<?php echo $ppGold; ?> !important;border-top:1.5px solid <?php echo $ppGold; ?> !important}
+.grid .dash{color:<?php echo $ppInk3; ?>}
+.grid .ab{color:#ff8f7e;font-weight:800}
+#print_condent .rc table.grid tbody td.err{color:<?php echo $ppErr; ?> !important}
+.gb{display:inline-block;min-width:30px;padding:2px 8px;border-radius:12px;font-weight:800;font-size:13.5px;color:#fff;background:#6e7a8c;line-height:1.35}
+.gb.g-none{background:<?php echo $ppChip; ?>;color:<?php echo $ppInk3; ?>}
+.gb.g-A1,.gb.g-A,.gb.g-Aplus{background:#17a35e}.gb.g-A2{background:#2bb07a}.gb.g-B1,.gb.g-B,.gb.g-Bplus{background:#3b8fd4}.gb.g-B2{background:#5aa3e0}.gb.g-C1,.gb.g-C,.gb.g-Cplus{background:#e5a526}.gb.g-C2{background:#dd8418}.gb.g-D{background:#dd6a35}.gb.g-E{background:#d84436}
 .two{display:table;width:100%;border-spacing:0}
 .two>div{display:table-cell;width:50%;vertical-align:top}
 .two>div.a{padding-right:6px}.two>div.b{padding-left:6px}
 .two>div>table.grid{width:100%}
-.key{border:1px solid <?php echo $ppBord; ?>;border-radius:10px;padding:7px 9px;font-size:12.5px;color:<?php echo $ppInk2; ?>;background:#fff}
-.key b{display:block;color:<?php echo $ppDeep; ?>;text-transform:uppercase;letter-spacing:.8px;font-size:12px;margin-bottom:4px}
+.key{border:1px solid <?php echo $ppBord; ?>;border-radius:10px;padding:7px 9px;font-size:12.5px;color:<?php echo $ppInk2; ?>;background:<?php echo $ppSurf; ?>}
+.key b{display:block;color:<?php echo $ppGold; ?>;text-transform:uppercase;letter-spacing:.8px;font-size:12px;margin-bottom:4px}
 .key span{display:inline-block;margin:2px 5px 2px 0;white-space:nowrap}
 .chk-note{margin-top:5px;font-size:12px;color:<?php echo $ppInk2; ?>}
 /* Performance Analysis - the St. Mary's graph */
-.pa{display:flex;align-items:flex-start;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;background:#fff;padding:14px 12px 6px;box-sizing:border-box}
+.pa{display:flex;align-items:flex-start;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;background:<?php echo $ppSurf; ?>;padding:14px 12px 6px;box-sizing:border-box}
 .pa-y{position:relative;width:34px;flex:none;height:<?php echo (int) $ppGraphH; ?>px}
 .pa-y span{position:absolute;right:6px;font-size:11px;color:<?php echo $ppInk3; ?>;line-height:1;transform:translateY(-50%)}
 .pa-plot{position:relative;flex:1;min-width:0}
 .pa-grid{position:absolute;left:0;right:0;top:0;height:<?php echo (int) $ppGraphH; ?>px}
-.pa-grid i{position:absolute;left:0;right:0;border-top:1px dashed #cdd2e4}
+.pa-grid i{position:absolute;left:0;right:0;border-top:1px dashed <?php echo $ppBord; ?>}
 .pa-cols{position:relative;display:flex;align-items:flex-end}
 .pa-col{flex:1;display:flex;flex-direction:column;align-items:center;min-width:0}
 .pa-bars{height:<?php echo (int) $ppGraphH; ?>px;width:100%;display:flex;align-items:flex-end;justify-content:center}
 .pa-b{width:16px;margin:0 2px;border-radius:3px 3px 0 0;position:relative}
-.pa-b b{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:<?php echo $ppDeep; ?>;white-space:nowrap}
-.pa-b.h{background:<?php echo $ppGold; ?>}.pa-b.a{background:#7d5fae}.pa-b.m{background:<?php echo $ppDeep; ?>}
+.pa-b b{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:<?php echo $ppInk; ?>;white-space:nowrap}
+/* on a dark ground the three bars are gold / lilac / near-white - the old "this student" bar was the deep
+   purple of the card and would now be invisible against it */
+.pa-b.h{background:<?php echo $ppGold; ?>}.pa-b.a{background:#9b7fd4}.pa-b.m{background:#e6e0f7}
 .pa-b.none{background:transparent}
 .pa-lbl{font-size:11px;font-weight:700;color:<?php echo $ppInk; ?>;margin-top:4px;text-align:center;line-height:1.15;word-break:break-word}
 .pa-key{margin-top:5px;text-align:center;font-size:11.5px;color:<?php echo $ppInk2; ?>;font-weight:700;letter-spacing:.3px}
 .pa-key .sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:4px;vertical-align:-1px}
-.pa-key .sw.h{background:<?php echo $ppGold; ?>}.pa-key .sw.a{background:#7d5fae}.pa-key .sw.m{background:<?php echo $ppDeep; ?>}
+.pa-key .sw.h{background:<?php echo $ppGold; ?>}.pa-key .sw.a{background:#9b7fd4}.pa-key .sw.m{background:#e6e0f7}
 .kpi{display:table;width:100%;border-spacing:0;margin-top:12px}
 .kpi>div{display:table-cell;width:25%;padding:0 5px}
 .kpi>div>div{background:linear-gradient(180deg,<?php echo $ppTint2; ?>,<?php echo $ppTint3; ?>);border:1px solid <?php echo $ppBord; ?>;border-top:3px solid <?php echo $ppGold; ?>;border-radius:10px;padding:9px 6px;text-align:center}
-.kpi b{display:block;font-size:23px;color:<?php echo $ppDeep; ?>;line-height:1.15}
+.kpi b{display:block;font-size:23px;color:<?php echo $ppGold; ?>;line-height:1.15}
 .kpi small{display:block;color:<?php echo $ppInk2; ?>;text-transform:uppercase;letter-spacing:1px;font-size:12px;margin-top:2px}
 .att{display:table;width:100%;border-spacing:0;margin-top:8px}
 .att>div{display:table-cell;width:50%;padding:0 5px}
 .att1>div{width:100%}
-.att>div>div{border:1px solid <?php echo $ppBord; ?>;border-radius:10px;padding:6px 10px;font-size:14.5px;background:<?php echo $ppTint1; ?>}
-.att small{color:<?php echo $ppDeep; ?>;text-transform:uppercase;letter-spacing:.8px;font-size:12px;font-weight:800;margin-right:8px}
-.rem{margin-top:8px;border:1px dashed #a8862b;border-radius:10px;padding:9px 12px;background:#fff6e0;font-size:15px;line-height:1.3}
-.rem small{display:inline-block;color:<?php echo $ppDeep; ?>;text-transform:uppercase;letter-spacing:.8px;font-size:12px;font-weight:800;margin:0 10px 0 0}
+.att>div>div{border:1px solid <?php echo $ppBord; ?>;border-radius:10px;padding:6px 10px;font-size:14.5px;background:<?php echo $ppSurf; ?>;color:<?php echo $ppInk; ?>}
+.att small{color:<?php echo $ppGold; ?>;text-transform:uppercase;letter-spacing:.8px;font-size:12px;font-weight:800;margin-right:8px}
+.rem{margin-top:8px;border:1px dashed <?php echo $ppGold; ?>;border-radius:10px;padding:9px 12px;background:#2a1f06;font-size:15px;line-height:1.3;color:<?php echo $ppInk; ?>}
+.rem small{display:inline-block;color:<?php echo $ppGold; ?>;text-transform:uppercase;letter-spacing:.8px;font-size:12px;font-weight:800;margin:0 10px 0 0}
 .sig{display:table;width:100%;margin-top:26px}
 .sig>div{display:table-cell;width:33.33%;text-align:center;padding:0 12px}
-.sig .ln{border-top:1.5px solid <?php echo $ppDeep; ?>;padding-top:5px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:<?php echo $ppDeep; ?>}
+.sig .ln{border-top:1.5px solid <?php echo $ppGold; ?>;padding-top:5px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:<?php echo $ppInk; ?>}
 .sig .nm{font-size:13px;color:<?php echo $ppInk2; ?>;margin-top:1px}
 .foot{margin-top:12px;text-align:center;font-size:12px;color:<?php echo $ppInk3; ?>;letter-spacing:.5px}
 /* print: one sheet a pupil, filled top to bottom */
-@media print{body{margin:0}.rc{box-shadow:none;border-radius:0;border:0;max-width:none;margin:0;zoom:.92;height:1148px;display:flex;flex-direction:column;overflow:visible;page-break-inside:avoid;page-break-after:always}.rc-top{flex:none}.rc-body{flex:1;display:flex;flex-direction:column;padding:12px 20px 14px}.rc-title,.prof,.sec,.grid,.two,.kpi,.key,.pa,.pa-key,.att,.rem{flex:none}.sig{flex:none;margin-top:auto;padding-top:20px}.rc *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{body{margin:0;background:<?php echo $ppDeep; ?>}.rc{box-shadow:none;border-radius:0;border:0;max-width:none;margin:0;zoom:.92;height:1148px;display:flex;flex-direction:column;overflow:visible;page-break-inside:avoid;page-break-after:always}.rc-top{flex:none}.rc-body{flex:1;display:flex;flex-direction:column;padding:12px 20px 14px}.rc-title,.prof,.sec,.grid,.two,.kpi,.key,.pa,.pa-key,.att,.rem{flex:none}.sig{flex:none;margin-top:auto;padding-top:20px}.rc *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 <?php
 $school  = Yii::app()->db->createCommand("SELECT * FROM tb_school WHERE 1 LIMIT 1")->queryRow();
@@ -584,8 +601,8 @@ foreach ($student_ids as $student_id) {
                 </tr>
             </thead>
             <tbody>
-            <?php if (!$exams) { echo '<tr><td class="l" style="color:#8e1b12;">No exams are set up for this class in ' . CHtml::encode($session) . '</td></tr>'; }
-                  elseif (!$subjects) { echo '<tr><td colspan="' . (count($ppCols) + 4) . '" style="color:#8e1b12;">Subject not mapped</td></tr>'; }
+            <?php if (!$exams) { echo '<tr><td class="l err">No exams are set up for this class in ' . CHtml::encode($session) . '</td></tr>'; }
+                  elseif (!$subjects) { echo '<tr><td colspan="' . (count($ppCols) + 4) . '" class="err">Subject not mapped</td></tr>'; }
                   else {
                       $i = 0;
                       foreach ($rows as $r) { $i++;
@@ -655,7 +672,7 @@ foreach ($student_ids as $student_id) {
             for ($k = count($box['rows']); $k < $pad; $k++) { $h .= '<tr><td class="l">&nbsp;</td><td></td></tr>'; }
             return $h . '</tbody></table>';
         };
-        if (!$coBoxes) { echo '<table class="grid"><tbody><tr><td colspan="2" style="color:#8e1b12;">No co-scholastic areas mapped to this class</td></tr></tbody></table>'; }
+        if (!$coBoxes) { echo '<table class="grid"><tbody><tr><td colspan="2" class="err">No co-scholastic areas mapped to this class</td></tr></tbody></table>'; }
         elseif (count($coBoxes) === 1) { $one = reset($coBoxes); echo $ppBox($one, 0); }
         else {
             $pair = array_slice($coBoxes, 0, 2, true);   /* the card has room for two boxes across */
@@ -780,7 +797,7 @@ foreach ($student_ids as $student_id) {
         var inner = $('#print_condent').html();
         var w = window.open('', '', 'height=700,width=1000,scrollbars=1,resizable=1');
         w.document.write('<html><head><title>Report Card</title>'
-            + '<style type="text/css">html,body{font-family:"Segoe UI",Calibri,Arial;margin:0;padding:0;background:#fff} @page{margin:8mm}</style>'
+            + '<style type="text/css">html,body{font-family:"Segoe UI",Calibri,Arial;margin:0;padding:0;background:#120c20;color:#f2effa} @page{margin:8mm}</style>'
             + '<style type="text/css">' + css + '</style></head><body><div id="print_condent">' + inner + '</div></body></html>');
         w.document.close();
         setTimeout(function () { w.focus(); w.print(); }, 900);
