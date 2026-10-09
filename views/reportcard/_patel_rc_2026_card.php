@@ -45,7 +45,11 @@ $ppBord = '#ddd6ef'; $ppTint1 = '#f6f4fb'; $ppTint2 = '#f9f7fd'; $ppTint3 = '#ef
 $ppLine = '#e6dff5'; $ppChip = '#e9e3f6'; $ppShad = '42,26,94';
 $ppGold = '#e6b422';
 $ppGraphH    = 112;     /* graph plot height in px */
-$ppShowGraph = true;    /* false hides the whole Performance Analysis section */
+/* PATEL_RC_FONT: off. The Performance Analysis block cost about 220px of the sheet, and the print fit
+   paid for it by shrinking every card to .72 - the marks landed near 11px on paper. With it off the same
+   card prints at about .83, so the 18px marks reach roughly 15px. Set it back to true to bring the graph
+   back, at the cost of that type size. */
+$ppShowGraph = false;   /* false hides the whole Performance Analysis section */
 $ppTitle     = 'Performance Profile';
 $ppExamLine  = 'Term 1';
 /* the weighted columns of the grid, in the order the school's sheets print them */
@@ -207,7 +211,7 @@ table.prof{width:100%;border-collapse:separate;border-spacing:0;background:<?php
 .sec .no{display:table-cell;width:26px;height:26px;border-radius:8px;background:<?php echo $ppGold; ?>;color:<?php echo $ppDeep; ?>;font-weight:800;font-size:14px;text-align:center;vertical-align:middle}
 .sec h3{display:table-cell;vertical-align:middle;padding-left:9px;margin:0;font-size:16px;letter-spacing:1.2px;text-transform:uppercase;color:<?php echo $ppDeep; ?>;font-weight:800}
 .sec .sub{display:table-cell;vertical-align:middle;text-align:right;font-size:12.5px;color:#000;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
-table.grid{width:100%;border-collapse:separate;border-spacing:0;font-size:15.5px;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;overflow:hidden}
+table.grid{width:100%;border-collapse:separate;border-spacing:0;font-size:18px;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;overflow:hidden}
 #print_condent .rc table.grid thead th{background:<?php echo $ppDeep; ?> !important;background-image:linear-gradient(180deg,<?php echo $ppMid; ?>,<?php echo $ppDeep; ?>) !important;color:#fff !important;font-weight:700;padding:7px 5px;text-align:center;font-size:12.5px;letter-spacing:.3px;border:0 !important;border-bottom:2px solid <?php echo $ppGold; ?> !important}
 .grid th small{display:block;font-weight:600;opacity:.85;font-size:12px}
 #print_condent .rc table.grid tbody td{padding:6px 5px;text-align:center;font-weight:700;border:0 !important;border-top:1px solid <?php echo $ppLine; ?> !important;background:#fff !important;color:#000 !important}
@@ -511,14 +515,14 @@ foreach ($student_ids as $student_id) {
 
     /* Print zoom, so each pupil fills one A4 sheet and never spills onto a second. The costs below are this
        card's own CSS read back at the PATEL_RC_FONT sizes: a section header is 16px + 13/6px margins = 35,
-       a table head 12.5px + 14 padding = 30, a body row 15.5px x 1.3 + 12 padding = 33. The base is
+       a table head 12.5px + 14 padding = 30, a body row 18px x 1.3 + 12 padding = 35. The base is
        everything a card always carries - header 130, title 58, profile 100, section 1 and its head 70,
        five subject rows 165, the total row 33, KPI 80, attendance 46, remarks 52, signatures 62, foot 28,
        padding 30. Side-by-side boxes do not add up: the taller of the pair sets the height. Bigger type
        leans on the zoom a little sooner, which is why the floor goes to .58. */
-    $ppEst = 854 + (count($rows) - 5) * 33
-           + ($addRows || $extraRows ? 70 + max(count($addRows), count($extraRows)) * 33 : 0)
-           + 70 + max($coTallest, 1) * 33
+    $ppEst = 866 + (count($rows) - 5) * 35
+           + ($addRows || $extraRows ? 70 + max(count($addRows), count($extraRows)) * 35 : 0)
+           + 70 + max($coTallest, 1) * 35
            + ($bands ? 92 : 0)
            + ($paRows ? ($ppGraphH + 110) : 0);
     /* PATEL_RC_FONT: the cap was .92, so even a sparse card printed 8% under its own type size; it is
