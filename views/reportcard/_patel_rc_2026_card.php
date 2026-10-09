@@ -200,7 +200,7 @@ $ppMainIn2 = implode(',', $ppMainQ2);
 .rc-body{padding:14px 22px 18px}
 .rc-title{text-align:center;margin:0 0 10px}
 .rc-title b{font-size:23px;color:<?php echo $ppDeep; ?>;letter-spacing:3px;text-transform:uppercase}
-.rc-title small{display:block;color:#000;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:1px}
+.rc-title small{display:block;color:#000;font-size:16px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-top:1px}
 .rc-title:after{content:'';display:block;width:64px;height:3px;background:<?php echo $ppGold; ?>;margin:6px auto 0;border-radius:2px}
 table.prof{width:100%;border-collapse:separate;border-spacing:0;background:<?php echo $ppTint1; ?>;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;border-left:5px solid <?php echo $ppGold; ?>}
 #print_condent .rc table.prof td{padding:7px 12px;width:33.3%;font-size:19px;vertical-align:top;background:transparent !important;color:#000 !important;border:0 !important}
@@ -211,10 +211,10 @@ table.prof{width:100%;border-collapse:separate;border-spacing:0;background:<?php
 .sec .no{display:table-cell;width:26px;height:26px;border-radius:8px;background:<?php echo $ppGold; ?>;color:<?php echo $ppDeep; ?>;font-weight:800;font-size:14px;text-align:center;vertical-align:middle}
 .sec h3{display:table-cell;vertical-align:middle;padding-left:9px;margin:0;font-size:16px;letter-spacing:1.2px;text-transform:uppercase;color:<?php echo $ppDeep; ?>;font-weight:800}
 .sec .sub{display:table-cell;vertical-align:middle;text-align:right;font-size:12.5px;color:#000;font-weight:700;text-transform:uppercase;letter-spacing:.6px}
-table.grid{width:100%;border-collapse:separate;border-spacing:0;font-size:22px;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;overflow:hidden}
+table.grid{width:100%;border-collapse:separate;border-spacing:0;font-size:26px;border:1px solid <?php echo $ppBord; ?>;border-radius:10px;overflow:hidden}
 #print_condent .rc table.grid thead th{background:<?php echo $ppDeep; ?> !important;background-image:linear-gradient(180deg,<?php echo $ppMid; ?>,<?php echo $ppDeep; ?>) !important;color:#fff !important;font-weight:700;padding:7px 5px;text-align:center;font-size:12.5px;letter-spacing:.3px;border:0 !important;border-bottom:2px solid <?php echo $ppGold; ?> !important}
 .grid th small{display:block;font-weight:600;opacity:.85;font-size:19px}
-#print_condent .rc table.grid tbody td{padding:6px 5px;text-align:center;font-weight:700;border:0 !important;border-top:1px solid <?php echo $ppLine; ?> !important;background:#fff !important;color:#000 !important}
+#print_condent .rc table.grid tbody td{padding:6px 5px;text-align:center;font-weight:800;border:0 !important;border-top:1px solid <?php echo $ppLine; ?> !important;background:#fff !important;color:#000 !important}
 #print_condent .rc table.grid tbody tr:nth-child(even) td{background:<?php echo $ppTint2; ?> !important}
 #print_condent .rc table.grid tbody td.l{text-align:left;font-weight:800 !important;padding-left:10px;font-size:16px}
 #print_condent .rc table.grid tbody tr.tot td{background:#fff6d8 !important;font-weight:800;color:<?php echo $ppDeep; ?> !important;border-top:1.5px solid <?php echo $ppGold; ?> !important}
@@ -515,14 +515,14 @@ foreach ($student_ids as $student_id) {
 
     /* Print zoom, so each pupil fills one A4 sheet and never spills onto a second. The costs below are this
        card's own CSS read back at the PATEL_RC_FONT sizes: a section header is 16px + 13/6px margins = 35,
-       a table head 12.5px + 14 padding = 30, a body row 22px x 1.3 + 12 padding = 41. The base is
-       everything a card always carries - header 130, title 58, profile 116 (19px rows), section 1 and
-       its head 70, five subject rows 205, the total row 41, KPI 80, attendance 46, remarks 58,
-       signatures 62, foot 28, padding 30. Side-by-side boxes do not add up: the taller of the pair sets
+       a table head 12.5px + 14 padding = 30, a body row 26px x 1.3 + 12 padding = 46. The base is
+       everything a card always carries - header 130, title 62 (bold 16px session line), profile 116
+       (19px rows), section 1 and its head 70, five subject rows 230, the total row 46, KPI 80,
+       attendance 46, remarks 58, signatures 62, foot 28, padding 30. Side-by-side boxes do not add up: the taller of the pair sets
        the height. Bigger type leans on the zoom a little sooner, which is why the floor goes to .58. */
-    $ppEst = 924 + (count($rows) - 5) * 41
-           + ($addRows || $extraRows ? 70 + max(count($addRows), count($extraRows)) * 41 : 0)
-           + 70 + max($coTallest, 1) * 41
+    $ppEst = 958 + (count($rows) - 5) * 46
+           + ($addRows || $extraRows ? 70 + max(count($addRows), count($extraRows)) * 46 : 0)
+           + 70 + max($coTallest, 1) * 46
            + ($bands ? 92 : 0)
            + ($paRows ? ($ppGraphH + 110) : 0);
     /* PATEL_RC_FONT: the cap was .92, so even a sparse card printed 8% under its own type size; it is
